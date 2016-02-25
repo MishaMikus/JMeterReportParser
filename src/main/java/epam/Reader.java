@@ -290,6 +290,7 @@ public class Reader {
 
             //URL
             reader.calculate(reader.urlMap);
+
             String fn = localDir + "\\summary_URL_" + type + ".csv";
             reader.saveToFile(fn);
             fileNameList.add(fn);
