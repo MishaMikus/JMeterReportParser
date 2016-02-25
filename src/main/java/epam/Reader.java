@@ -286,9 +286,9 @@ public class Reader {
             List<String> fileNameList = new ArrayList<>();
             String localDir = rootDir + type;
             Reader reader = new Reader();
+            reader.read(localDir + "\\summary.csv");
 
             //URL
-            reader.read(localDir + "\\summary.csv");
             reader.calculate(reader.urlMap);
             String fn = localDir + "\\summary_URL_" + type + ".csv";
             reader.saveToFile(fn);
