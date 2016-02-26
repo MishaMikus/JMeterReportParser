@@ -16,36 +16,39 @@ public class Reader {
 
     public void read(String fn) throws IOException {
         System.out.println("START");
+        String regexForCSV = ",(?=([^\"]*\"[^\"]*\")*[^\"]*$)";
         BufferedReader br = new BufferedReader(new FileReader(new File(fn)));
-        String[] headers = br.readLine().split("\t");//cur first line
-        String line;
-        hitPerSecond = new TreeMap<>();
-        userPerSecond = new TreeMap<>();
-        bytesPerSecondPerActions = new TreeMap<>();
-        actionSet = new HashSet();
-        while ((line = br.readLine()) != null) {
-            String[] lineSep = line.split("\t");
-            Record rec = new Record(headers, lineSep);
+        String line = br.readLine();
+        if (line != null) {
+            String[] headers = line.split(regexForCSV);//cur first line
+            hitPerSecond = new TreeMap<>();
+            userPerSecond = new TreeMap<>();
+            bytesPerSecondPerActions = new TreeMap<>();
+            actionSet = new HashSet();
+            while ((line = br.readLine()) != null) {
+                String[] lineSep = line.split(regexForCSV);
+                Record rec = new Record(headers, lineSep);
 
-            //URL
-            if (!rec.label.startsWith("TC")) {
+                //URL
+                if (!rec.label.startsWith("TC")) {
 
-                if (!("null".equals(rec.url))) {
-                    //HPS
-                    addToHPSMap(hitPerSecond, rec);
-                    //URL
-                    addToMap(urlMap, rec);
+                    if (!("null".equals(rec.url))) {
+                        //HPS
+                        addToHPSMap(hitPerSecond, rec);
+                        //URL
+                        addToMap(urlMap, rec);
+                    }
+                } else {
+                    //BYTES
+                    addToBytesPerSecondPerActionsMap(bytesPerSecondPerActions, rec);
+                    //TC
+                    Record recTC = new Record(headers, lineSep);
+                    recTC.url = recTC.label;
+                    addToMap(tcMap, recTC);
                 }
-            } else {
-                //BYTES
-                addToBytesPerSecondPerActionsMap(bytesPerSecondPerActions, rec);
-                //TC
-                Record recTC = new Record(headers, lineSep);
-                recTC.url = recTC.label;
-                addToMap(tcMap, recTC);
+                //USER
+                addToUserMap(userPerSecond, rec);
             }
-            //USER
-            addToUserMap(userPerSecond, rec);
         }
     }
 
@@ -202,9 +205,12 @@ public class Reader {
     private void saveHPSToFile(String fn) throws IOException {
         FileWriter writer = new FileWriter(fn);
         writer.append("Time,Count\n");
-        for (Map.Entry<Long, Long> entry : hitPerSecond.entrySet()) {
-            writer.append(simpleDateFormat.format(new Date(entry.getKey() - 60 * 60 * 1000))).append(",");
-            writer.append(entry.getValue().toString()).append("\n");
+        try {
+            for (Map.Entry<Long, Long> entry : hitPerSecond.entrySet()) {
+                writer.append(simpleDateFormat.format(new Date(entry.getKey() - 60 * 60 * 1000))).append(",");
+                writer.append(entry.getValue().toString()).append("\n");
+            }
+        } catch (Exception ignored) {
         }
         writer.flush();
         writer.close();
@@ -215,39 +221,44 @@ public class Reader {
         FileWriter writer = new FileWriter(fn);
         String errorByTCHeader = "";
         Set<String> actionSetFilter = new HashSet<>();
-        for (String action : actionSet) {
-            Long sum = 0L;
-            for (Map.Entry<Long, UserErrorEntry> entry : userPerSecond.entrySet()) {
-                Long value=entry.getValue().errorCountByTCMap.get(action);
-                sum += ((value==null)?0L:value);
+        try {
+            for (String action : actionSet) {
+                Long sum = 0L;
+                for (Map.Entry<Long, UserErrorEntry> entry : userPerSecond.entrySet()) {
+                    Long value = entry.getValue().errorCountByTCMap.get(action);
+                    sum += ((value == null) ? 0L : value);
+                }
+                if (sum > 0L) {
+                    actionSetFilter.add(action);
+                }
             }
-            if (sum > 0L) {
-                actionSetFilter.add(action);
-            }
-        }
 
-        for (String action : actionSetFilter) {
-            errorByTCHeader += ",ERR-" + action;
-        }
-
-        writer.append("Time,UserCount" + errorByTCHeader + "\n");
-        for (Map.Entry<Long, UserErrorEntry> entry : userPerSecond.entrySet()) {
-            writer.append(simpleDateFormat.format(new Date(entry.getKey() - 60 * 60 * 1000))).append(",");
-            UserErrorEntry userErrorEntry = entry.getValue();
-
-            String errors = "";
             for (String action : actionSetFilter) {
-                Long errorCount = userErrorEntry.errorCountByTCMap.get(action);
-                if (errorCount == null) errorCount = 0L;
-                errors += "," + errorCount;
+                errorByTCHeader += ",ERR-" + action;
             }
-            writer.append(Integer.toString(userErrorEntry.threadNameSet.size())).append(errors).append("\n");
+
+            writer.append("Time,UserCount" + errorByTCHeader + "\n");
+            for (Map.Entry<Long, UserErrorEntry> entry : userPerSecond.entrySet()) {
+                writer.append(simpleDateFormat.format(new Date(entry.getKey() - 60 * 60 * 1000))).append(",");
+                UserErrorEntry userErrorEntry = entry.getValue();
+
+                String errors = "";
+                for (String action : actionSetFilter) {
+                    Long errorCount = userErrorEntry.errorCountByTCMap.get(action);
+                    if (errorCount == null) errorCount = 0L;
+                    errors += "," + errorCount;
+                }
+                writer.append(Integer.toString(userErrorEntry.threadNameSet.size())).append(errors).append("\n");
+            }
+        } catch (Exception ignored) {
         }
         writer.flush();
         writer.close();
         System.out.println("SAVE to " + fn);
     }
-    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("HH:mm:ss");
+
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+
     private void saveBytesPerSecToFile(String fn) throws IOException {
         FileWriter writer = new FileWriter(fn);
         List<String> headerList = null;
@@ -280,7 +291,7 @@ public class Reader {
     }
 
     public static void main(String[] arg) throws IOException {
-        String rootDir = "D:\\LocalWorkspace\\jMeter\\Data\\21.02.2016\\";
+        String rootDir = "D:\\LocalWorkspace\\jMeter\\Data\\26.02.2016\\";
         List<String> zipFileNameList = new ArrayList<>();
         for (String type : Arrays.asList("BASELINE", "LOAD", "STRESS")) {
             List<String> fileNameList = new ArrayList<>();
@@ -290,7 +301,6 @@ public class Reader {
 
             //URL
             reader.calculate(reader.urlMap);
-
             String fn = localDir + "\\summary_URL_" + type + ".csv";
             reader.saveToFile(fn);
             fileNameList.add(fn);

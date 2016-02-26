@@ -36,12 +36,12 @@ public class Record implements Cloneable {
         this.dataType = lineSep[headerList.indexOf( "dataType")];
         this.success = lineSep[headerList.indexOf( "success")];
 
-        this.grpThread = lineSep[headerList.indexOf( "grpThread")];
-        this.allThread = lineSep[headerList.indexOf( "allThread")];
+        this.grpThread = lineSep[headerList.indexOf( "grpThreads")];
+        this.allThread = lineSep[headerList.indexOf( "allThreads")];
         this.url = lineSep[headerList.indexOf("URL")].split("\\?")[0].replaceAll("/[\\d]+", "/SOME_ID").replaceAll("[lms][\\d]+[lms]up[\\d]+","SOME_USER_NAME");
         this.latency = lineSep[headerList.indexOf( "Latency")];
         this.errorCount = lineSep[headerList.indexOf( "ErrorCount")];
-        this.idleTime = lineSep[headerList.indexOf( "idleTime")];
+        this.idleTime = lineSep[headerList.indexOf( "IdleTime")];
 
 
     }
