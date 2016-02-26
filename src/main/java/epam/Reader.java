@@ -262,6 +262,7 @@ public class Reader {
     private void saveBytesPerSecToFile(String fn) throws IOException {
         FileWriter writer = new FileWriter(fn);
         List<String> headerList = null;
+        try{
         for (Map.Entry<Long, Map<String, Long>> entry : bytesPerSecondPerActions.entrySet()) {
             if (headerList == null) {
                 headerList = new ArrayList<>(actionSet);
@@ -284,7 +285,7 @@ public class Reader {
             }
 
             writer.append(line).append(",").append(overall.toString()).append("\n");
-        }
+        }}catch (Exception ignored){}
         writer.flush();
         writer.close();
         System.out.println("SAVE to " + fn);
