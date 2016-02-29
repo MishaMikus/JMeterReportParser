@@ -1,16 +1,17 @@
-package epam;
+package epam.model;
 
 
 public class Report {
-    String url;
-    int pass;
-    int fails;
-    int min;
-    int av;
-    int max;
-    double sd;
-    int p90;
-    double tps;
+    public int count;
+    public String url;
+    public int pass;
+    public int fails;
+    public int min;
+    public int av;
+    public int max;
+    public double sd;
+    public int p90;
+    public double tps;
 
     @Override
     public String toString() {
@@ -23,6 +24,7 @@ public class Report {
         sb.append(", sd='").append(sd).append('\'');
         sb.append(", p90='").append(p90).append('\'');
         sb.append(", tps='").append(tps).append('\'');
+        sb.append(", count='").append(count).append('\'');
         sb.append("}\n");
         return sb.toString();
     }

@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/JMeterReportParser.iml" filepath="$PROJECT_DIR$/.idea/JMeterReportParser.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../jMeter/JMeterSandBox/JMeterSandBox.iml" filepath="$PROJECT_DIR$/../jMeter/JMeterSandBox/JMeterSandBox.iml" />
     </modules>
   </component>
 </project>

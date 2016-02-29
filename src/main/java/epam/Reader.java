@@ -1,5 +1,10 @@
 package epam;
 
+import epam.model.Record;
+import epam.model.Report;
+import epam.report.CaseActionTransaction;
+import epam.report.ReportContainer;
+
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -13,6 +18,8 @@ public class Reader {
     Map<Long, UserErrorEntry> userPerSecond;
     Map<Long, Map<String, Long>> bytesPerSecondPerActions;
     Set<String> actionSet;
+
+    ReportContainer caseActionTransaction = new CaseActionTransaction();
 
     public void read(String fn) throws IOException {
         System.out.println("START");
@@ -48,6 +55,7 @@ public class Reader {
                 }
                 //USER
                 addToUserMap(userPerSecond, rec);
+                caseActionTransaction.add(rec);
             }
         }
     }
@@ -164,14 +172,7 @@ public class Reader {
                         System.err.println("elapsedSum2=" + elapsedSum2 + " n=" + n + " Math.sqrt(elapsedSum2 /(n-1))" + Math.sqrt(elapsedSum2 / (n - 1)));
                     }
                 }
-
-                Collections.sort(list, new Comparator<Record>() {
-                    @Override
-                    public int compare(Record o1, Record o2) {
-                        return new Integer(o1.elapsed).compareTo(o2.elapsed);
-                    }
-                });
-
+                Collections.sort(list, (o1, o2) -> new Integer(o1.elapsed).compareTo(o2.elapsed));
                 report.p90 = list.get((n * 90) / 100).elapsed;
             }
 
@@ -262,30 +263,32 @@ public class Reader {
     private void saveBytesPerSecToFile(String fn) throws IOException {
         FileWriter writer = new FileWriter(fn);
         List<String> headerList = null;
-        try{
-        for (Map.Entry<Long, Map<String, Long>> entry : bytesPerSecondPerActions.entrySet()) {
-            if (headerList == null) {
-                headerList = new ArrayList<>(actionSet);
-                String headers = "";
+        try {
+            for (Map.Entry<Long, Map<String, Long>> entry : bytesPerSecondPerActions.entrySet()) {
+                if (headerList == null) {
+                    headerList = new ArrayList<>(actionSet);
+                    String headers = "";
+                    for (String header : headerList) {
+                        headers += "," + header;
+                    }
+                    writer.append("Time" + headers + ",Overall\n");
+                }
+                writer.append(simpleDateFormat.format(new Date(entry.getKey() - 60 * 60 * 1000)));
+                String line = "";
+                Long overall = 0L;
                 for (String header : headerList) {
-                    headers += "," + header;
+                    Object value = entry.getValue().get(header);
+                    if (value == null) {
+                        value = "0";
+                    }
+                    line += "," + value;
+                    overall += Long.parseLong(value + "");
                 }
-                writer.append("Time" + headers + ",Overall\n");
-            }
-            writer.append(simpleDateFormat.format(new Date(entry.getKey() - 60 * 60 * 1000)));
-            String line = "";
-            Long overall = 0L;
-            for (String header : headerList) {
-                Object value = entry.getValue().get(header);
-                if (value == null) {
-                    value = "0";
-                }
-                line += "," + value;
-                overall += Long.parseLong(value + "");
-            }
 
-            writer.append(line).append(",").append(overall.toString()).append("\n");
-        }}catch (Exception ignored){}
+                writer.append(line).append(",").append(overall.toString()).append("\n");
+            }
+        } catch (Exception ignored) {
+        }
         writer.flush();
         writer.close();
         System.out.println("SAVE to " + fn);
@@ -326,6 +329,10 @@ public class Reader {
             //BYTES
             fn = localDir + "\\summary_BYTES_" + type + ".csv";
             reader.saveBytesPerSecToFile(fn);
+            fileNameList.add(fn);
+
+            fn = localDir + "\\summary_CASE_ACTION_TRANSACTION_" + type + ".csv";
+            reader.caseActionTransaction.saveToFile(fn);
             fileNameList.add(fn);
 
             //ZIPPING

@@ -1,4 +1,4 @@
-package epam;
+package epam.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,7 +64,7 @@ public class Record implements Cloneable {
         sb.append(", Latency='").append(latency).append('\'');
         sb.append(", ErrorCount='").append(errorCount).append('\'');
         sb.append(", IdleTime='").append(idleTime).append('\'');
-        sb.append('}');
+        sb.append("}\n");
         return sb.toString();
     }
 }
