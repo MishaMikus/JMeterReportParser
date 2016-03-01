@@ -1,4 +1,4 @@
-package epam;
+package epam.model;
 
 import java.util.HashMap;
 import java.util.HashSet;

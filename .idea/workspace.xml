@@ -2,15 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="438b0348-6595-4d70-a51f-adeacd6428a2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/Mykhaylo_Mikus.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/epam/report/CaseAction.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/epam/report/HitPerSecond.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/epam/report/BytesPerSecondsActions.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/epam/report/UserPerSecondVsErrorByAction.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/epam/Reader.java" afterPath="$PROJECT_DIR$/src/main/java/epam/Reader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/epam/model/Record.java" afterPath="$PROJECT_DIR$/src/main/java/epam/model/Record.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/epam/model/Report.java" afterPath="$PROJECT_DIR$/src/main/java/epam/model/Report.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/epam/report/CaseAction.java" afterPath="$PROJECT_DIR$/src/main/java/epam/report/CaseAction.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/epam/report/CaseActionTransaction.java" afterPath="$PROJECT_DIR$/src/main/java/epam/report/CaseActionTransaction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/epam/report/HitPerSecond.java" afterPath="$PROJECT_DIR$/src/main/java/epam/report/HitPerSecond.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/epam/report/ReportContainer.java" afterPath="$PROJECT_DIR$/src/main/java/epam/report/ReportContainer.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/epam/UserErrorEntry.java" afterPath="$PROJECT_DIR$/src/main/java/epam/model/UserErrorEntry.java" />
     </list>
     <ignored path="JMeterSandBox.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,8 +37,9 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/epam/report/CaseAction.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="25" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
+              <caret line="64" column="51" selection-start-line="64" selection-start-column="51" selection-end-line="64" selection-end-column="51" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="e#421#422#0" expanded="true" />
                 <element signature="e#448#449#0" expanded="true" />
               </folding>
@@ -50,10 +51,48 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/epam/Reader.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="43" column="28" selection-start-line="43" selection-start-column="28" selection-end-line="43" selection-end-column="28" />
+              <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#448#449#0" expanded="true" />
+                <element signature="e#510#511#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserPerSecondVsErrorByAction.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/epam/report/UserPerSecondVsErrorByAction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.47134936">
+              <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#392#393#0" expanded="true" />
+                <element signature="e#419#420#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BytesPerSecondsActions.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/epam/report/BytesPerSecondsActions.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="21" column="71" selection-start-line="20" selection-start-column="7" selection-end-line="21" selection-end-column="71" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserErrorEntry.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/epam/model/UserErrorEntry.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -62,7 +101,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/epam/report/ReportContainer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="27" column="17" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="17" />
+              <caret line="52" column="8" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#530#531#0" expanded="true" />
@@ -71,6 +110,8 @@
                 <element signature="e#1243#1244#0" expanded="true" />
                 <element signature="e#1297#1298#0" expanded="true" />
                 <element signature="e#1366#1367#0" expanded="true" />
+                <element signature="e#1645#1646#0" expanded="true" />
+                <element signature="e#1709#1710#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -80,21 +121,21 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/epam/report/HitPerSecond.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="55" selection-start-line="12" selection-start-column="55" selection-end-line="12" selection-end-column="55" />
+              <caret line="45" column="17" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#323#324#0" expanded="true" />
-                <element signature="e#350#351#0" expanded="true" />
+                <element signature="e#322#323#0" expanded="true" />
+                <element signature="e#349#350#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CaseActionTransaction.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CaseActionTransaction.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/epam/report/CaseActionTransaction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.26927504">
-              <caret line="127" column="49" selection-start-line="127" selection-start-column="49" selection-end-line="127" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="202" column="102" selection-start-line="202" selection-start-column="102" selection-end-line="202" selection-end-column="102" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#469#470#0" expanded="true" />
@@ -134,7 +175,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../jMeter/JMeterSandBox/workouts/workout_2745494235.json" />
         <option value="$PROJECT_DIR$/../jMeter/JMeterSandBox/workouts/workout_2634720631.json" />
         <option value="$PROJECT_DIR$/../jMeter/JMeterSandBox/workouts/workout_2632627927.json" />
         <option value="$PROJECT_DIR$/../jMeter/JMeterSandBox/workouts/workout_2632627719.json" />
@@ -179,10 +219,13 @@
         <option value="$PROJECT_DIR$/src/main/java/epam/model/Report.java" />
         <option value="$PROJECT_DIR$/src/main/java/epam/report/ReportContainerable.java" />
         <option value="$PROJECT_DIR$/src/main/java/epam/report/HitPerSecond.java" />
+        <option value="$PROJECT_DIR$/src/main/java/epam/report/CaseActionTransaction.java" />
         <option value="$PROJECT_DIR$/src/main/java/epam/report/CaseAction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/epam/report/BytesPerSecondsActions.java" />
+        <option value="$PROJECT_DIR$/src/main/java/epam/model/UserErrorEntry.java" />
         <option value="$PROJECT_DIR$/src/main/java/epam/Reader.java" />
         <option value="$PROJECT_DIR$/src/main/java/epam/report/ReportContainer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/epam/report/CaseActionTransaction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/epam/report/UserPerSecondVsErrorByAction.java" />
       </list>
     </option>
   </component>
@@ -849,7 +892,13 @@
       <option name="project" value="LOCAL" />
       <updated>1456745689420</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="new Format of Labels&#10;add timeFilter for Load">
+      <created>1456843219399</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1456843219399</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -864,8 +913,8 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37346712" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3121516" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3322185" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36566332" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="IvyIDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -897,7 +946,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="create" />
     <MESSAGE value="Fix CSV Parser&#10;To parse comma split cells" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix CSV Parser&#10;To parse comma split cells" />
+    <MESSAGE value="new Format of Labels&#10;add timeFilter for Load" />
+    <option name="LAST_COMMIT_MESSAGE" value="new Format of Labels&#10;add timeFilter for Load" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -922,6 +972,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#448#449#0" expanded="true" />
+            <element signature="e#510#511#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -942,7 +994,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/epam/UserErrorEntry.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/epam/model/UserErrorEntry.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="15" column="41" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
@@ -964,6 +1016,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#448#449#0" expanded="true" />
+            <element signature="e#510#511#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -984,7 +1038,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/epam/UserErrorEntry.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/epam/model/UserErrorEntry.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="15" column="41" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
@@ -1035,14 +1089,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/epam/UserErrorEntry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20203735">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_25/src.zip!/java/util/Comparator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3327674">
@@ -1083,25 +1129,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/epam/report/HitPerSecond.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/epam/report/CaseAction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="55" selection-start-line="12" selection-start-column="55" selection-end-line="12" selection-end-column="55" />
+          <caret line="64" column="51" selection-start-line="64" selection-start-column="51" selection-end-line="64" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#323#324#0" expanded="true" />
-            <element signature="e#350#351#0" expanded="true" />
+            <element signature="e#421#422#0" expanded="true" />
+            <element signature="e#448#449#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/epam/report/CaseAction.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/epam/report/HitPerSecond.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="25" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
+          <caret line="45" column="17" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
           <folding>
-            <element signature="e#421#422#0" expanded="true" />
-            <element signature="e#448#449#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#322#323#0" expanded="true" />
+            <element signature="e#349#350#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/epam/report/CaseActionTransaction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="202" column="102" selection-start-line="202" selection-start-column="102" selection-end-line="202" selection-end-column="102" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#469#470#0" expanded="true" />
+            <element signature="e#496#497#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/epam/model/UserErrorEntry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/epam/report/BytesPerSecondsActions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="71" selection-start-line="20" selection-start-column="7" selection-end-line="21" selection-end-column="71" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1109,9 +1186,11 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/epam/Reader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="28" selection-start-line="43" selection-start-column="28" selection-end-line="43" selection-end-column="28" />
+          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#448#449#0" expanded="true" />
+            <element signature="e#510#511#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1119,7 +1198,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/epam/report/ReportContainer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="17" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="17" />
+          <caret line="52" column="8" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#530#531#0" expanded="true" />
@@ -1128,18 +1207,20 @@
             <element signature="e#1243#1244#0" expanded="true" />
             <element signature="e#1297#1298#0" expanded="true" />
             <element signature="e#1366#1367#0" expanded="true" />
+            <element signature="e#1645#1646#0" expanded="true" />
+            <element signature="e#1709#1710#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/epam/report/CaseActionTransaction.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/epam/report/UserPerSecondVsErrorByAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26927504">
-          <caret line="127" column="49" selection-start-line="127" selection-start-column="49" selection-end-line="127" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.47134936">
+          <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#469#470#0" expanded="true" />
-            <element signature="e#496#497#0" expanded="true" />
+            <element signature="e#392#393#0" expanded="true" />
+            <element signature="e#419#420#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -20,8 +20,6 @@ public class CaseActionTransaction extends ReportContainer {
     public void add(Record rec) {
         String label = rec.label;
         if ((!label.startsWith("TC")) && (!("null".equals(rec.url)))) {
-            String useCase = label.split("\\] \\[")[1].split("\\]")[0];
-            String action = label.split(" \\[")[1].split("\\]")[0];
             Map<String, String> exceptReplaceMap = new HashMap<>();
             exceptReplaceMap.put("HTTP Request login [login] [Use Case mobile 1]",
                     "POST v3/OAuth2/Authorize [login] [Use Case mobile 1]"
@@ -38,6 +36,9 @@ public class CaseActionTransaction extends ReportContainer {
             exceptReplaceMap.put("HTTP Request login [login] [Use Case mobile 5]",
                     "POST v3/OAuth2/Authorize [login] [Use Case mobile 5]"
             );
+            exceptReplaceMap.put("HTTP Request login [login] [Use Case  mobile 5]",
+                    "POST v3/OAuth2/Authorize [login] [Use Case mobile 5]"
+            );
             exceptReplaceMap.put("HTTP Request login [login] [Use Case mobile 6]",
                     "POST v3/OAuth2/Authorize [login] [Use Case mobile 6]"
             );
@@ -50,6 +51,9 @@ public class CaseActionTransaction extends ReportContainer {
             exceptReplaceMap.put("HTTP Request lifetime-stats [statistics] [Use Case mobile 5]",
                     "GET v3/Users/me/lifetime-stats [statistics] [Use Case mobile 5]"
             );
+            exceptReplaceMap.put("HTTP Request lifetime-stats [statistics] [Use Case  mobile 5]",
+                    "GET v3/Users/me/lifetime-stats [statistics] [Use Case mobile 5]"
+            );
             exceptReplaceMap.put("HTTP Request lifetime-stats [statistics] [Use Case mobile 6]",
                     "GET v3/Users/me/lifetime-stats [statistics] [Use Case mobile 6]"
             );
@@ -57,6 +61,9 @@ public class CaseActionTransaction extends ReportContainer {
                     "GET v3/Users/me/workouts/history [statistics] [Use Case mobile 3]"
             );
             exceptReplaceMap.put("HTTP Request workouts/history [statistics] [Use Case mobile 5]",
+                    "GET v3/Users/me/workouts/history [statistics] [Use Case mobile 5]"
+            );
+            exceptReplaceMap.put("HTTP Request workouts/history [statistics] [Use Case  mobile 5]",
                     "GET v3/Users/me/workouts/history [statistics] [Use Case mobile 5]"
             );
             exceptReplaceMap.put("HTTP Request workouts/history [statistics] [Use Case mobile 6]",
@@ -67,6 +74,9 @@ public class CaseActionTransaction extends ReportContainer {
                     label = entry.getValue();
                 }
             }
+
+            String useCase = getUseCase(label);
+            String action = getAction(label);
             String method = label.trim().split(" ")[0];
 
             if (("HTTP".equals(method)) || ("".equals(method))) {
@@ -152,7 +162,7 @@ public class CaseActionTransaction extends ReportContainer {
                     if (endTimeLocal == null) endTimeLocal = record.timeStamp;
                     endTimeLocal = (record.timeStamp >= endTimeLocal) ? record.timeStamp : endTimeLocal;
                 }
-            } else System.out.println(startTime.longValue() + "\t" + endTime.longValue() + "\t" + record.timeStamp.longValue());
+            }
         }
 
         if (report.count.intValue() > 0) {

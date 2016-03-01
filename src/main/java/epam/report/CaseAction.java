@@ -20,8 +20,6 @@ public class CaseAction extends ReportContainer {
     public void add(Record rec) {
         String label = rec.label;
         if ((!label.startsWith("TC")) && (!("null".equals(rec.url)))) {
-            String useCase = label.split("\\] \\[")[1].split("\\]")[0];
-            String action = label.split(" \\[")[1].split("\\]")[0];
             Map<String, String> exceptReplaceMap = new HashMap<>();
             exceptReplaceMap.put("HTTP Request login [login] [Use Case mobile 1]",
                     "POST v3/OAuth2/Authorize [login] [Use Case mobile 1]"
@@ -62,12 +60,14 @@ public class CaseAction extends ReportContainer {
             exceptReplaceMap.put("HTTP Request workouts/history [statistics] [Use Case mobile 6]",
                     "GET v3/Users/me/workouts/history [statistics] [Use Case mobile 6]"
             );
+
             for (Map.Entry<String, String> entry : exceptReplaceMap.entrySet()) {
                 if (entry.getKey().equals(label)) {
                     label = entry.getValue();
                 }
             }
-            addTransAction(useCase, action, rec);
+
+            addTransAction(getUseCase(label), getAction(label), rec);
         }
     }
 

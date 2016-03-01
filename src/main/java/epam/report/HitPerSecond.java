@@ -5,12 +5,12 @@ import epam.model.Record;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class HitPerSecond extends ReportContainer {
 
-    Map<Double, Double> hitPerSecond = new HashMap<>();
+    Map<Double, Double> hitPerSecond =new TreeMap<>();
 
     public HitPerSecond(String type) {
         super(type);

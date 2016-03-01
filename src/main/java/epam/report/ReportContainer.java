@@ -48,4 +48,16 @@ public abstract class ReportContainer {
     public boolean passTimeLimit(Double timeStamp) {
         return timeStamp >= startTime && timeStamp <= endTime;
     }
+
+    public String getAction(String label) {
+        String action = label.split(" \\[")[1].split("\\]")[0];
+        if ("TC login".equals(action)) {
+            action = "workout history WEB";
+        }
+        return action;
+    }
+
+    public String getUseCase(String label) {
+        return label.split("\\] \\[")[1].split("\\]")[0];
+    }
 }
