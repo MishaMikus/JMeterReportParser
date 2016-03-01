@@ -2,16 +2,16 @@ package epam.model;
 
 
 public class Report {
-    public int count;
+    public Double count= 0d;
     public String url;
-    public int pass;
-    public int fails;
-    public int min;
-    public int av;
-    public int max;
-    public double sd;
-    public int p90;
-    public double tps;
+    public Double pass=0d;
+    public Double fails=0d;
+    public Double min=0d;
+    public Double av=0d;
+    public Double max=0d;
+    public Double sd=0d;
+    public Double p90=0d;
+    public Double tps=0d;
 
     @Override
     public String toString() {

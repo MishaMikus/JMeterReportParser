@@ -5,15 +5,15 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Record implements Cloneable {
-    public long timeStamp;
-    public int elapsed;
+    public Double timeStamp;
+    public Double elapsed;
     public String label;
     public String responseCode;
     public String responseMessage;
     public String threadName;
     public String dataType;
     public String success;
-    public Long bytes;
+    public Double bytes;
     public String grpThread;
     public String allThread;
     public String url;
@@ -23,25 +23,34 @@ public class Record implements Cloneable {
 
     public Record(String[] headers, String[] lineSep) {
         List<String> headerList = new ArrayList<>(Arrays.asList(headers));
-        try{
-        this.timeStamp = Long.parseLong(lineSep[headerList.indexOf( "timeStamp")]);
-        this.elapsed = Integer.parseInt(lineSep[headerList.indexOf("elapsed")]);
-        this.bytes = Long.parseLong(lineSep[headerList.indexOf( "bytes")]);
-        }catch (Exception ignored){
+        try {
+            this.timeStamp = Double.parseDouble(lineSep[headerList.indexOf("timeStamp")]);
+        } catch (Exception ignored) {
+            System.err.println("timeStamp : " + lineSep);
         }
-        this.label = lineSep[headerList.indexOf( "label")];
-        this.responseCode = lineSep[headerList.indexOf( "responseCode")];
-        this.responseMessage = lineSep[headerList.indexOf( "responseMessage")];
-        this.threadName = lineSep[headerList.indexOf( "threadName")];
-        this.dataType = lineSep[headerList.indexOf( "dataType")];
-        this.success = lineSep[headerList.indexOf( "success")];
+        try {
+            this.elapsed = Double.parseDouble(lineSep[headerList.indexOf("elapsed")]);
+        } catch (Exception ignored) {
+            System.err.println("elapsed : " + lineSep);
+        }
+        try {
+            this.bytes = Double.parseDouble(lineSep[headerList.indexOf("bytes")]);
+        } catch (Exception ignored) {
+            System.err.println("bytes : " + lineSep);
+        }
+        this.label = lineSep[headerList.indexOf("label")];
+        this.responseCode = lineSep[headerList.indexOf("responseCode")];
+        this.responseMessage = lineSep[headerList.indexOf("responseMessage")];
+        this.threadName = lineSep[headerList.indexOf("threadName")];
+        this.dataType = lineSep[headerList.indexOf("dataType")];
+        this.success = lineSep[headerList.indexOf("success")];
 
-        this.grpThread = lineSep[headerList.indexOf( "grpThreads")];
-        this.allThread = lineSep[headerList.indexOf( "allThreads")];
-        this.url = lineSep[headerList.indexOf("URL")].split("\\?")[0].replaceAll("/[\\d]+", "/SOME_ID").replaceAll("[lms][\\d]+[lms]up[\\d]+","SOME_USER_NAME");
-        this.latency = lineSep[headerList.indexOf( "Latency")];
-        this.errorCount = lineSep[headerList.indexOf( "ErrorCount")];
-        this.idleTime = lineSep[headerList.indexOf( "IdleTime")];
+        this.grpThread = lineSep[headerList.indexOf("grpThreads")];
+        this.allThread = lineSep[headerList.indexOf("allThreads")];
+        this.url = lineSep[headerList.indexOf("URL")].split("\\?")[0].replaceAll("/[\\d]+", "/SOME_ID").replaceAll("[lms][\\d]+[lms]up[\\d]+", "SOME_USER_NAME");
+        this.latency = lineSep[headerList.indexOf("Latency")];
+        this.errorCount = lineSep[headerList.indexOf("ErrorCount")];
+        this.idleTime = lineSep[headerList.indexOf("IdleTime")];
 
 
     }
