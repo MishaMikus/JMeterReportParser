@@ -12,8 +12,8 @@ public class HitPerSecond extends ReportContainer {
 
     Map<Double, Double> hitPerSecond =new TreeMap<>();
 
-    public HitPerSecond(String type) {
-        super(type);
+    public HitPerSecond(String type, String fn) {
+        super(type, fn);
     }
 
     @Override
@@ -32,8 +32,7 @@ public class HitPerSecond extends ReportContainer {
     }
 
     @Override
-    public void saveToFile(String fn) throws IOException {
-        fileName = fn;
+    public void saveToFile() throws IOException {
         FileWriter writer = new FileWriter(fileName);
         writer.append("Time,Count\n");
        correctStartEndTime();

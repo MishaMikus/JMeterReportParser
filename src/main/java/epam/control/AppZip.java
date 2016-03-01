@@ -1,4 +1,4 @@
-package epam;
+package epam.control;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

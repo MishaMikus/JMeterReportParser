@@ -12,8 +12,8 @@ public class CaseAction extends ReportContainer {
     private Map<String, Map<String, List<Record>>> caseActionTransActionDraft = new HashMap<>();
     private Map<String, Map<String, Report>> caseActionTransAction = new HashMap<>();
 
-    public CaseAction(String type) {
-        super(type);
+    public CaseAction(String type, String fn) {
+        super(type, fn);
     }
 
     @Override
@@ -147,8 +147,7 @@ public class CaseAction extends ReportContainer {
     }
 
     @Override
-    public void saveToFile(String fn) throws IOException, InterruptedException {
-        fileName = fn;
+    public void saveToFile( ) throws IOException, InterruptedException {
         calculate();
         FileWriter writer = new FileWriter(fileName);
         writer.append("UseCase,Action,AV,Pass,Fails,Min,Max,SD,90%,TPS,count\n");

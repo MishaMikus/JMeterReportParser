@@ -17,7 +17,7 @@ public abstract class ReportContainer {
 
     public abstract void add(Record rec);
 
-    public abstract void saveToFile(String fn) throws IOException, InterruptedException;
+    public abstract void saveToFile() throws IOException, InterruptedException;
 
     public void logEnd() {
         System.out.println("SAVE " + new File(fileName).getName() + " DONE");
@@ -41,8 +41,9 @@ public abstract class ReportContainer {
         endTime = endTime <= rec.timeStamp ? rec.timeStamp : endTime;
     }
 
-    public ReportContainer(String type) {
+    public ReportContainer(String type, String fileName) {
         this.type = type;
+        this.fileName=fileName;
     }
 
     public boolean passTimeLimit(Double timeStamp) {

@@ -12,8 +12,8 @@ public class UserPerSecondVsErrorByAction extends ReportContainer {
     HashSet<String> actionSet = new HashSet();
     Map<Long, UserErrorEntry> userPerSecond = new HashMap<>();
 
-    public UserPerSecondVsErrorByAction(String type) {
-        super(type);
+    public UserPerSecondVsErrorByAction(String type, String fn) {
+        super(type, fn);
     }
 
     @Override
@@ -43,9 +43,8 @@ public class UserPerSecondVsErrorByAction extends ReportContainer {
     }
 
     @Override
-    public void saveToFile(String fn) throws IOException, InterruptedException {
-        fileName = fn;
-        FileWriter writer = new FileWriter(fn);
+    public void saveToFile() throws IOException, InterruptedException {
+        FileWriter writer = new FileWriter(fileName);
         String errorByTCHeader = "";
         Set<String> actionSetFilter = new HashSet<>();
         for (String action : actionSet) {

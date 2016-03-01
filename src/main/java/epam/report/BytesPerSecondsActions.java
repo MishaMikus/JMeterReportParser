@@ -12,8 +12,8 @@ public class BytesPerSecondsActions extends ReportContainer {
     Map<Long, Map<String, Double>> bytesPerSecondPerActions = new TreeMap<>();
     HashSet<String> actionSet = new HashSet();
 
-    public BytesPerSecondsActions(String type) {
-        super(type);
+    public BytesPerSecondsActions(String type, String fn) {
+        super(type, fn);
     }
 
     @Override
@@ -43,9 +43,8 @@ public class BytesPerSecondsActions extends ReportContainer {
     }
 
     @Override
-    public void saveToFile(String fn) throws IOException, InterruptedException {
-        fileName = fn;
-        FileWriter writer = new FileWriter(fn);
+    public void saveToFile() throws IOException, InterruptedException {
+        FileWriter writer = new FileWriter(fileName);
         List<String> headerList = null;
             for (Map.Entry<Long, Map<String, Double>> entry : bytesPerSecondPerActions.entrySet()) {
 
