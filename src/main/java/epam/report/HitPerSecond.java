@@ -10,7 +10,7 @@ import java.util.TreeMap;
 
 public class HitPerSecond extends ReportContainer {
 
-    Map<Double, Double> hitPerSecond =new TreeMap<>();
+   public Map<Double, Double> hitPerSecond =new TreeMap<>();
 
     public HitPerSecond(String name) {
         super(name);

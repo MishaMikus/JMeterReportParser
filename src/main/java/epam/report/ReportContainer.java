@@ -9,13 +9,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class ReportContainer {
+    public static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
 
     public Double startTime;
     public Double endTime;
     public String fileName;
     public String type;
     public String name;
-    public final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
 
     public abstract void add(Record rec);
 
@@ -63,7 +63,7 @@ public abstract class ReportContainer {
         return label.split("\\] \\[")[1].split("\\]")[0];
     }
 
-    public String correctLabel(String label){
+    public String correctLabel(String label) {
         Map<String, String> exceptReplaceMap = new HashMap<>();
         exceptReplaceMap.put("HTTP Request login [login] [Use Case mobile 1]",
                 "POST v3/OAuth2/Authorize [login] [Use Case mobile 1]"
