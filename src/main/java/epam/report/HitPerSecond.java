@@ -12,8 +12,8 @@ public class HitPerSecond extends ReportContainer {
 
     Map<Double, Double> hitPerSecond =new TreeMap<>();
 
-    public HitPerSecond(String type, String fn) {
-        super(type, fn);
+    public HitPerSecond(String name) {
+        super(name);
     }
 
     @Override

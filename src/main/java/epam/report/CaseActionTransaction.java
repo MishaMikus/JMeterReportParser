@@ -12,69 +12,16 @@ public class CaseActionTransaction extends ReportContainer {
     private Map<String, Map<String, Map<String, List<Record>>>> caseActionTransActionDraft = new HashMap<>();
     private Map<String, Map<String, Map<String, Report>>> caseActionTransAction = new HashMap<>();
 
-    public CaseActionTransaction(String type, String fn) {
-        super(type, fn);
+
+    public CaseActionTransaction(String name) {
+        super(name);
     }
 
     @Override
     public void add(Record rec) {
         String label = rec.label;
         if ((!label.startsWith("TC")) && (!("null".equals(rec.url)))) {
-            Map<String, String> exceptReplaceMap = new HashMap<>();
-            exceptReplaceMap.put("HTTP Request login [login] [Use Case mobile 1]",
-                    "POST v3/OAuth2/Authorize [login] [Use Case mobile 1]"
-            );
-            exceptReplaceMap.put("HTTP Request login [login] [Use Case mobile 2]",
-                    "POST v3/OAuth2/Authorize [login] [Use Case mobile 2]"
-            );
-            exceptReplaceMap.put("HTTP Request login [login] [Use Case mobile 3]",
-                    "POST v3/OAuth2/Authorize [login] [Use Case mobile 3]"
-            );
-            exceptReplaceMap.put("HTTP Request login [login] [Use Case mobile 4]",
-                    "POST v3/OAuth2/Authorize [login] [Use Case mobile 4]"
-            );
-            exceptReplaceMap.put("HTTP Request login [login] [Use Case mobile 5]",
-                    "POST v3/OAuth2/Authorize [login] [Use Case mobile 5]"
-            );
-            exceptReplaceMap.put("HTTP Request login [login] [Use Case  mobile 5]",
-                    "POST v3/OAuth2/Authorize [login] [Use Case mobile 5]"
-            );
-            exceptReplaceMap.put("HTTP Request login [login] [Use Case mobile 6]",
-                    "POST v3/OAuth2/Authorize [login] [Use Case mobile 6]"
-            );
-            exceptReplaceMap.put("HTTP Request workouts [post workout] [Use Case mobile 3]",
-                    "POST v3/users/me/workouts [post workout] [Use Case mobile 3]"
-            );
-            exceptReplaceMap.put("HTTP Request lifetime-stats [statistics] [Use Case mobile 3]",
-                    "GET v3/Users/me/lifetime-stats [statistics] [Use Case mobile 3]"
-            );
-            exceptReplaceMap.put("HTTP Request lifetime-stats [statistics] [Use Case mobile 5]",
-                    "GET v3/Users/me/lifetime-stats [statistics] [Use Case mobile 5]"
-            );
-            exceptReplaceMap.put("HTTP Request lifetime-stats [statistics] [Use Case  mobile 5]",
-                    "GET v3/Users/me/lifetime-stats [statistics] [Use Case mobile 5]"
-            );
-            exceptReplaceMap.put("HTTP Request lifetime-stats [statistics] [Use Case mobile 6]",
-                    "GET v3/Users/me/lifetime-stats [statistics] [Use Case mobile 6]"
-            );
-            exceptReplaceMap.put("HTTP Request workouts/history [statistics] [Use Case mobile 3]",
-                    "GET v3/Users/me/workouts/history [statistics] [Use Case mobile 3]"
-            );
-            exceptReplaceMap.put("HTTP Request workouts/history [statistics] [Use Case mobile 5]",
-                    "GET v3/Users/me/workouts/history [statistics] [Use Case mobile 5]"
-            );
-            exceptReplaceMap.put("HTTP Request workouts/history [statistics] [Use Case  mobile 5]",
-                    "GET v3/Users/me/workouts/history [statistics] [Use Case mobile 5]"
-            );
-            exceptReplaceMap.put("HTTP Request workouts/history [statistics] [Use Case mobile 6]",
-                    "GET v3/Users/me/workouts/history [statistics] [Use Case mobile 6]"
-            );
-            for (Map.Entry<String, String> entry : exceptReplaceMap.entrySet()) {
-                if (entry.getKey().equals(label)) {
-                    label = entry.getValue();
-                }
-            }
-
+           label=correctLabel(label);
             String useCase = getUseCase(label);
             String action = getAction(label);
             String method = label.trim().split(" ")[0];

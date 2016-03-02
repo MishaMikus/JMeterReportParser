@@ -2,79 +2,46 @@ package epam.report;
 
 import epam.model.Record;
 import epam.model.UrlEntry;
-import epam.model.UserErrorEntry;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+import java.util.Date;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class TimeStampElapsedByURL extends ReportContainer {
+    Map<Double, UrlEntry> timeStampElapsedByURLMap = new TreeMap<>();
 
-    HashSet<String> actionSet = new HashSet();
-    Map<Long, UrlEntry> userPerSecond = new HashMap<>();
-
-    public TimeStampElapsedByURL(String type, String fn) {
-        super(type, fn);
+    public TimeStampElapsedByURL(String name) {
+        super(name);
     }
+
     @Override
     public void add(Record rec) {
         if ((!rec.label.startsWith("TC")) && (!("null".equals(rec.url)))) {
-            String action = getAction(rec.label);
-            actionSet.add(action);
-            Long deltaTime = 1000L * 10L;
-            Long currentSecond = (rec.timeStamp.longValue() / deltaTime) * deltaTime;
-            if (currentSecond > 0L) {
-                UserErrorEntry tmpUserErrorEntry = userPerSecond.get(currentSecond);
-                if (tmpUserErrorEntry == null) {
-                    tmpUserErrorEntry = new UserErrorEntry();
-                }
-                tmpUserErrorEntry.threadNameSet.add(rec.threadName);
-                Long errorCount = tmpUserErrorEntry.errorCountByActionMap.get(action);
-                if (errorCount == null) {
-                    errorCount = 0L;
-                }
-                if ("FALSE".equals(rec.success.toUpperCase()))
-                    errorCount++;
-                tmpUserErrorEntry.errorCountByActionMap.put(action, errorCount);
+            String label=correctLabel(rec.label);
+            String method = label.trim().split(" ")[0];
 
-
-                userPerSecond.put(currentSecond, tmpUserErrorEntry);
+            if (("HTTP".equals(method)) || ("".equals(method))) {
+                System.err.println(label);
             }
-        }
+            String transAction = method + " " + rec.url.replaceAll("\"", "");
+            timeStampElapsedByURLMap.put(rec.timeStamp,new UrlEntry(getAction(rec.label),rec.elapsed,transAction));
+            }
+
     }
 
     @Override
     public void saveToFile() throws IOException, InterruptedException {
         FileWriter writer = new FileWriter(fileName);
-        String errorByAction = "";
-        Set<String> actionSetFilter = new HashSet<>();
-        for (String action : actionSet) {
-            Long sum = 0L;
-            for (Map.Entry<Long, UserErrorEntry> entry : userPerSecond.entrySet()) {
-                Long value = entry.getValue().errorCountByActionMap.get(action);
-                sum += ((value == null) ? 0L : value);
-            }
-            if (sum > 0L) {
-                actionSetFilter.add(action);
-            }
-        }
 
-        for (String action : actionSetFilter) {
-            errorByAction += ",ERR-" + action;
-        }
-
-        writer.append("Time,UserCount" + errorByAction + "\n");
-        for (Map.Entry<Long, UserErrorEntry> entry : userPerSecond.entrySet()) {
-            writer.append(simpleDateFormat.format(new Date(entry.getKey() - 60 * 60 * 1000))).append(",");
-            UserErrorEntry userErrorEntry = entry.getValue();
-
-            String errors = "";
-            for (String action : actionSetFilter) {
-                Long errorCount = userErrorEntry.errorCountByActionMap.get(action);
-                if (errorCount == null) errorCount = 0L;
-                errors += "," + errorCount;
-            }
-            writer.append(Integer.toString(userErrorEntry.threadNameSet.size())).append(errors).append("\n");
+        writer.append("Time,URL,Action,elapsed\n");
+        for (Map.Entry<Double, UrlEntry> entry : timeStampElapsedByURLMap.entrySet()) {
+            UrlEntry urlEntry = entry.getValue();
+            writer.append(simpleDateFormat.format(new Date(entry.getKey().longValue() - 60 * 60 * 1000))).append(",")
+                    .append(urlEntry.url).append(",")
+                    .append(urlEntry.action).append(",")
+                    .append(urlEntry.elapsed.longValue()+"").append("\n");
         }
         writer.flush();
         writer.close();

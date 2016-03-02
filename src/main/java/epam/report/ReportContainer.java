@@ -5,6 +5,8 @@ import epam.model.Record;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class ReportContainer {
 
@@ -12,7 +14,7 @@ public abstract class ReportContainer {
     public Double endTime;
     public String fileName;
     public String type;
-
+    public String name;
     public final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
 
     public abstract void add(Record rec);
@@ -41,9 +43,8 @@ public abstract class ReportContainer {
         endTime = endTime <= rec.timeStamp ? rec.timeStamp : endTime;
     }
 
-    public ReportContainer(String type, String fileName) {
-        this.type = type;
-        this.fileName=fileName;
+    public ReportContainer(String name) {
+        this.name = name;
     }
 
     public boolean passTimeLimit(Double timeStamp) {
@@ -60,5 +61,63 @@ public abstract class ReportContainer {
 
     public String getUseCase(String label) {
         return label.split("\\] \\[")[1].split("\\]")[0];
+    }
+
+    public String correctLabel(String label){
+        Map<String, String> exceptReplaceMap = new HashMap<>();
+        exceptReplaceMap.put("HTTP Request login [login] [Use Case mobile 1]",
+                "POST v3/OAuth2/Authorize [login] [Use Case mobile 1]"
+        );
+        exceptReplaceMap.put("HTTP Request login [login] [Use Case mobile 2]",
+                "POST v3/OAuth2/Authorize [login] [Use Case mobile 2]"
+        );
+        exceptReplaceMap.put("HTTP Request login [login] [Use Case mobile 3]",
+                "POST v3/OAuth2/Authorize [login] [Use Case mobile 3]"
+        );
+        exceptReplaceMap.put("HTTP Request login [login] [Use Case mobile 4]",
+                "POST v3/OAuth2/Authorize [login] [Use Case mobile 4]"
+        );
+        exceptReplaceMap.put("HTTP Request login [login] [Use Case mobile 5]",
+                "POST v3/OAuth2/Authorize [login] [Use Case mobile 5]"
+        );
+        exceptReplaceMap.put("HTTP Request login [login] [Use Case  mobile 5]",
+                "POST v3/OAuth2/Authorize [login] [Use Case mobile 5]"
+        );
+        exceptReplaceMap.put("HTTP Request login [login] [Use Case mobile 6]",
+                "POST v3/OAuth2/Authorize [login] [Use Case mobile 6]"
+        );
+        exceptReplaceMap.put("HTTP Request workouts [post workout] [Use Case mobile 3]",
+                "POST v3/users/me/workouts [post workout] [Use Case mobile 3]"
+        );
+        exceptReplaceMap.put("HTTP Request lifetime-stats [statistics] [Use Case mobile 3]",
+                "GET v3/Users/me/lifetime-stats [statistics] [Use Case mobile 3]"
+        );
+        exceptReplaceMap.put("HTTP Request lifetime-stats [statistics] [Use Case mobile 5]",
+                "GET v3/Users/me/lifetime-stats [statistics] [Use Case mobile 5]"
+        );
+        exceptReplaceMap.put("HTTP Request lifetime-stats [statistics] [Use Case  mobile 5]",
+                "GET v3/Users/me/lifetime-stats [statistics] [Use Case mobile 5]"
+        );
+        exceptReplaceMap.put("HTTP Request lifetime-stats [statistics] [Use Case mobile 6]",
+                "GET v3/Users/me/lifetime-stats [statistics] [Use Case mobile 6]"
+        );
+        exceptReplaceMap.put("HTTP Request workouts/history [statistics] [Use Case mobile 3]",
+                "GET v3/Users/me/workouts/history [statistics] [Use Case mobile 3]"
+        );
+        exceptReplaceMap.put("HTTP Request workouts/history [statistics] [Use Case mobile 5]",
+                "GET v3/Users/me/workouts/history [statistics] [Use Case mobile 5]"
+        );
+        exceptReplaceMap.put("HTTP Request workouts/history [statistics] [Use Case  mobile 5]",
+                "GET v3/Users/me/workouts/history [statistics] [Use Case mobile 5]"
+        );
+        exceptReplaceMap.put("HTTP Request workouts/history [statistics] [Use Case mobile 6]",
+                "GET v3/Users/me/workouts/history [statistics] [Use Case mobile 6]"
+        );
+        for (Map.Entry<String, String> entry : exceptReplaceMap.entrySet()) {
+            if (entry.getKey().equals(label)) {
+                label = entry.getValue();
+            }
+        }
+        return label;
     }
 }

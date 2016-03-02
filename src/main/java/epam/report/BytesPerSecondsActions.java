@@ -12,15 +12,15 @@ public class BytesPerSecondsActions extends ReportContainer {
     Map<Long, Map<String, Double>> bytesPerSecondPerActions = new TreeMap<>();
     HashSet<String> actionSet = new HashSet();
 
-    public BytesPerSecondsActions(String type, String fn) {
-        super(type, fn);
+    public BytesPerSecondsActions(String name) {
+        super(name);
     }
 
     @Override
     public void add(Record rec) {
         String label = rec.label;
         if ((!label.startsWith("TC")) && (!("null".equals(rec.url)))) {
-
+            label=correctLabel(label);
             Long deltaTime = 1000L * 60L;
             Long currentSecond = (rec.timeStamp.longValue() / deltaTime) * deltaTime;
             if (currentSecond > 0) {
