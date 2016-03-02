@@ -26,17 +26,17 @@ public class Record implements Cloneable {
         try {
             this.timeStamp = Double.parseDouble(lineSep[headerList.indexOf("timeStamp")]);
         } catch (Exception ignored) {
-            System.err.println("timeStamp : " + lineSep);
+            System.err.println("timeStamp : " + Arrays.toString(lineSep));
         }
         try {
             this.elapsed = Double.parseDouble(lineSep[headerList.indexOf("elapsed")]);
         } catch (Exception ignored) {
-            System.err.println("elapsed : " + lineSep);
+            System.err.println("elapsed : " + Arrays.toString(lineSep));
         }
         try {
             this.bytes = Double.parseDouble(lineSep[headerList.indexOf("bytes")]);
         } catch (Exception ignored) {
-            System.err.println("bytes : " + lineSep);
+            System.err.println("bytes : " + Arrays.toString(lineSep));
         }
         this.label = lineSep[headerList.indexOf("label")];
         this.responseCode = lineSep[headerList.indexOf("responseCode")];

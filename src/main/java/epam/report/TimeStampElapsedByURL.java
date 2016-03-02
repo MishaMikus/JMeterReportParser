@@ -1,18 +1,19 @@
 package epam.report;
 
 import epam.model.Record;
+import epam.model.UrlEntry;
 import epam.model.UserErrorEntry;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-public class UserPerSecondVsErrorByAction extends ReportContainer {
+public class TimeStampElapsedByURL extends ReportContainer {
 
     HashSet<String> actionSet = new HashSet();
-    Map<Long, UserErrorEntry> userPerSecond = new HashMap<>();
+    Map<Long, UrlEntry> userPerSecond = new HashMap<>();
 
-    public UserPerSecondVsErrorByAction(String type, String fn) {
+    public TimeStampElapsedByURL(String type, String fn) {
         super(type, fn);
     }
     @Override
