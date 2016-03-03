@@ -54,7 +54,7 @@ public class CaseActionTransaction extends ReportContainer {
         for (Map.Entry<String, Map<String, Map<String, List<Record>>>> caseEntry : caseActionTransActionDraft.entrySet()) {
             for (Map.Entry<String, Map<String, List<Record>>> actionEntry : caseEntry.getValue().entrySet()) {
                 for (Map.Entry<String, List<Record>> transActionEntry : actionEntry.getValue().entrySet()) {
-                    addReport(caseEntry.getKey(), actionEntry.getKey(), transActionEntry.getKey(), makeReport(transActionEntry.getValue()));
+                    addReport(caseEntry.getKey(), actionEntry.getKey(), transActionEntry.getKey(), new Report(transActionEntry.getValue(),startTime,endTime));
                 }
             }
         }
@@ -71,73 +71,8 @@ public class CaseActionTransaction extends ReportContainer {
         caseActionTransAction.get(useCase).get(action).put(transAction, report);
     }
 
-    private Report makeReport(List<Record> list) {
-        Report report = new Report();
-        int elapsedSum = 0;
-        double elapsedSum2 = 0;
-        report.count = 0d;
-        report.fails = 0d;
-        Double startTimeLocal = null;
-        Double endTimeLocal = null;
-        for (Record record : list) {
-            if (passTimeLimit(record.timeStamp)) {
-                if (0d < record.elapsed) {
-                    elapsedSum += record.elapsed;
-                    report.fails += (("FALSE".equals(record.success)) ? 1 : 0);
-                    report.count++;
 
-                    //ResponseTime
-                    if ((report.min == null) || (report.min == 0)) {
-                        report.min = record.elapsed;
-                    }
-                    if (report.max == null) {
-                        report.max = record.elapsed;
-                    }
 
-                    if (record.elapsed >= report.max) {
-                        report.max = record.elapsed;
-                    }
-                    if ((record.elapsed <= report.min)) {
-                        report.min = record.elapsed;
-                    }
-
-                    //Times[start,stop]
-
-                    if (startTimeLocal == null) startTimeLocal = record.timeStamp;
-                    startTimeLocal = (record.timeStamp <= startTimeLocal) ? record.timeStamp : startTimeLocal;
-
-                    if (endTimeLocal == null) endTimeLocal = record.timeStamp;
-                    endTimeLocal = (record.timeStamp >= endTimeLocal) ? record.timeStamp : endTimeLocal;
-                }
-            }
-        }
-
-        if (report.count.intValue() > 0) {
-            report.av = elapsedSum / report.count;
-            double dtSeconds = ((endTimeLocal - startTimeLocal) / 1000d);
-            report.tps = report.count / dtSeconds;
-        }
-
-        if (report.count >= 2) {
-            for (Record record : list) {
-                if (passTimeLimit(record.timeStamp)) {
-                    double d = record.elapsed - report.av;
-                    elapsedSum2 += (d * d);
-                    report.sd = Math.sqrt(elapsedSum2 / (report.count));
-                    if ("NaN".equals(report.sd + "")) {
-                        System.err.println("elapsedSum2=" + elapsedSum2 + " n=" + report.count + " Math.sqrt(elapsedSum2 /(n-1))" + Math.sqrt(elapsedSum2 / (report.count - 1)));
-                    }
-                }
-            }
-            Collections.sort(list, (o1, o2) -> o1.elapsed.compareTo(o2.elapsed));
-            report.p90 = list.get((int) ((report.count * 90) / 100)).elapsed;
-        }
-
-        report.pass = list.size() - report.fails;
-        report.url = list.get(0).url;
-        if (report.count == 0d) return null;
-        return report;
-    }
 
     @Override
     public void saveToFile() throws IOException, InterruptedException {

@@ -18,11 +18,13 @@ public class Main {
                     new CaseAction("CASE_ACTION"),
                     new BytesPerSecondsActions("BYTES_PER_SECONDS_ACTIONS"),
                     new UserPerSecondVsErrorByAction("USER_PER_SECOND_VS_ERROR_BY_ACTION"),
-                    new TimeStampElapsedByURL("TIME_STAMP_ELAPSED_BY_URL")));
+                    new TimeStampElapsedByURL("TIME_STAMP_ELAPSED_BY_URL"),
+                    new StatisticByURL("STATISTIC_BY_URL")));
             reader.read(rootDir + type + "\\summary.csv");
             reader.saveAll();
             reader.zipAll();
-            ChartMaker.make(hitPerSecond.hitPerSecond);
+
+            //ChartMaker.make(hitPerSecond.hitPerSecond);
         }
 
         new AppZip(Reader.zipFileNameList, rootDir + "\\summaryParsedReport.zip").zipIt();

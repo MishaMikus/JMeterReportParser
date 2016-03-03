@@ -28,7 +28,6 @@ public class TimeStampElapsedByURL extends ReportContainer {
             String transAction = method + " " + rec.url.replaceAll("\"", "");
             timeStampElapsedByURLMap.put(rec.timeStamp, new UrlEntry(getAction(rec.label), rec.elapsed, transAction));
         }
-
     }
 
     @Override

@@ -5,7 +5,10 @@ import epam.model.Report;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CaseAction extends ReportContainer {
 
@@ -22,6 +25,7 @@ public class CaseAction extends ReportContainer {
         if ((!label.startsWith("TC")) && (!("null".equals(rec.url)))) {
             label = correctLabel(label);
             addTransAction(getUseCase(label), getAction(label), rec);
+            calculateStartEndTime(rec);
         }
     }
 
@@ -42,62 +46,9 @@ public class CaseAction extends ReportContainer {
                 if (caseActionTransAction.get(caseEntry.getKey()) == null) {
                     caseActionTransAction.put(caseEntry.getKey(), new HashMap<>());
                 }
-                caseActionTransAction.get(caseEntry.getKey()).put(actionEntry.getKey(), makeReport(actionEntry.getValue()));
+                caseActionTransAction.get(caseEntry.getKey()).put(actionEntry.getKey(), new Report(actionEntry.getValue(), startTime, endTime));
             }
         }
-    }
-
-    private Report makeReport(List<Record> list) {
-        Report report = new Report();
-        report.count = (double) list.size();
-        int elapsedSum = 0;
-        double elapsedSum2 = 0;
-        report.min = list.get(0).elapsed;
-        report.max = report.min;
-        report.fails = 0d;
-        double startTime = list.get(0).timeStamp;
-        double endTime = startTime;
-        for (Record record : list) {
-            elapsedSum += record.elapsed;
-            report.fails += (("FALSE".equals(record.success)) ? 1 : 0);
-
-            //ResponseTime
-            if (record.elapsed >= report.max) {
-                report.max = record.elapsed;
-            }
-            if ((record.elapsed <= report.min) && (record.elapsed > 0)) {
-                report.min = record.elapsed;
-            }
-
-            //Times[start,stop]
-            if (record.timeStamp >= endTime) {
-                endTime = record.timeStamp;
-            }
-            if ((record.timeStamp <= startTime) && (record.timeStamp > 0)) {
-                startTime = record.timeStamp;
-            }
-        }
-
-        report.av = elapsedSum / report.count;
-        double dtSeconds = ((endTime - startTime) / 1000d);
-        report.tps = report.count / dtSeconds;
-        if (report.count >= 2) {
-            for (Record record : list) {
-                double d = record.elapsed - report.av;
-                elapsedSum2 += (d * d);
-                report.sd = Math.sqrt(elapsedSum2 / (report.count));
-                if ("NaN".equals(report.sd + "")) {
-                    System.err.println("elapsedSum2=" + elapsedSum2 + " n=" + report.count + " Math.sqrt(elapsedSum2 /(n-1))" + Math.sqrt(elapsedSum2 / (report.count - 1)));
-                }
-            }
-            Collections.sort(list, (o1, o2) -> o1.elapsed.compareTo(o2.elapsed));
-            report.p90 = list.get((int) ((report.count * 90) / 100)).elapsed;
-        }
-
-        report.pass = list.size() - report.fails;
-        report.url = list.get(0).url;
-
-        return report;
     }
 
     @Override
@@ -119,7 +70,6 @@ public class CaseAction extends ReportContainer {
                         .append(report.p90.toString()).append(",")
                         .append(report.tps.toString()).append(",")
                         .append(report.count.toString()).append(",\n");
-
             }
         }
         writer.flush();

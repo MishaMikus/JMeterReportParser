@@ -47,10 +47,6 @@ public abstract class ReportContainer {
         this.name = name;
     }
 
-    public boolean passTimeLimit(Double timeStamp) {
-        return timeStamp >= startTime && timeStamp <= endTime;
-    }
-
     public String getAction(String label) {
         String action = label.split(" \\[")[1].split("\\]")[0];
         if ("TC login".equals(action)) {
@@ -120,4 +116,5 @@ public abstract class ReportContainer {
         }
         return label;
     }
+
 }

@@ -58,7 +58,6 @@ public class Reader {
     public void saveAll() throws IOException, InterruptedException {
         for (ReportContainer container : reportContainerList) {
             container.saveToFile();
-
         }
     }
 

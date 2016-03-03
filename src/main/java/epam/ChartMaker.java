@@ -25,11 +25,11 @@ public class ChartMaker {
         for (Map.Entry<Double, Double> entry : map.entrySet()) {
             String time=simpleDateFormat.format(new Date(entry.getKey().longValue()));
             Long value=entry.getValue().longValue();
-            dataSet.addValue(value,"Time",time);
+            dataSet.addValue(value,"SOME URL", time);
         }
         JFreeChart jFreeChart = ChartFactory.createBarChart("Subject Vs Marks", "Subject", "Marks", dataSet, PlotOrientation.VERTICAL, true, true, false);
-        int width = 6640;
-        int height = 1480;
+        int width = 1024;
+        int height = 768;
         ByteArrayOutputStream chartOut = new ByteArrayOutputStream();
         ChartUtilities.writeChartAsPNG(chartOut, jFreeChart, width, height);
         HSSFWorkbook workbook = new HSSFWorkbook();
