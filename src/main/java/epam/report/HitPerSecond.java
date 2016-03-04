@@ -10,10 +10,10 @@ import java.util.TreeMap;
 
 public class HitPerSecond extends ReportContainer {
 
-   public Map<Double, Double> hitPerSecond =new TreeMap<>();
+    public Map<Double, Double> hitPerSecond = new TreeMap<>();
 
-    public HitPerSecond(String name) {
-        super(name);
+    public HitPerSecond() {
+        super();
     }
 
     @Override
@@ -35,7 +35,7 @@ public class HitPerSecond extends ReportContainer {
     public void saveToFile() throws IOException {
         FileWriter writer = new FileWriter(fileName);
         writer.append("Time,Count\n");
-       correctStartEndTime();
+        correctStartEndTime();
         try {
             for (Map.Entry<Double, Double> entry : hitPerSecond.entrySet()) {
                 Double key = entry.getKey();

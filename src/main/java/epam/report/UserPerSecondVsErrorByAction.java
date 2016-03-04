@@ -12,14 +12,14 @@ public class UserPerSecondVsErrorByAction extends ReportContainer {
     HashSet<String> actionSet = new HashSet();
     Map<Long, UserErrorEntry> userPerSecond = new HashMap<>();
 
-    public UserPerSecondVsErrorByAction(String name) {
-        super(name);
+    public UserPerSecondVsErrorByAction() {
+        super();
     }
 
     @Override
     public void add(Record rec) {
         if ((!rec.label.startsWith("TC")) && (!("null".equals(rec.url)))) {
-            String label=correctLabel(rec.label);
+            String label = correctLabel(rec.label);
             String action = getAction(label);
             actionSet.add(action);
             Long deltaTime = 1000L * 10L;

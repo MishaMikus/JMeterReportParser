@@ -15,8 +15,8 @@ public class CaseAction extends ReportContainer {
     private Map<String, Map<String, List<Record>>> caseActionTransActionDraft = new HashMap<>();
     private Map<String, Map<String, Report>> caseActionTransAction = new HashMap<>();
 
-    public CaseAction(String name) {
-        super(name);
+    public CaseAction() {
+        super();
     }
 
     @Override

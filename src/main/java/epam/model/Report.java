@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Report {
 
-    private static final Double ELAPSED_LIMIT = 4d * 1000d;
+    private static final Double ELAPSED_LIMIT = 400d;
 
     public Double count = 0d;
     public String url;

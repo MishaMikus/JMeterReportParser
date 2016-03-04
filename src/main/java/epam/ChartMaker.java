@@ -23,9 +23,9 @@ public class ChartMaker {
     public static void make(Map<Double, Double> map) throws IOException {
         DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
         for (Map.Entry<Double, Double> entry : map.entrySet()) {
-            String time=simpleDateFormat.format(new Date(entry.getKey().longValue()));
-            Long value=entry.getValue().longValue();
-            dataSet.addValue(value,"SOME URL", time);
+            String time = simpleDateFormat.format(new Date(entry.getKey().longValue()));
+            Long value = entry.getValue().longValue();
+            dataSet.addValue(value, "SOME URL", time);
         }
         JFreeChart jFreeChart = ChartFactory.createBarChart("Subject Vs Marks", "Subject", "Marks", dataSet, PlotOrientation.VERTICAL, true, true, false);
         int width = 1024;

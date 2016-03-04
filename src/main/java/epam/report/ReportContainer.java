@@ -43,8 +43,8 @@ public abstract class ReportContainer {
         endTime = endTime <= rec.timeStamp ? rec.timeStamp : endTime;
     }
 
-    public ReportContainer(String name) {
-        this.name = name;
+    public ReportContainer() {
+        this.name = this.getClass().getName();
     }
 
     public String getAction(String label) {

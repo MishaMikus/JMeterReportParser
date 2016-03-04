@@ -15,8 +15,8 @@ public class StatisticByURL extends ReportContainer {
     public Map<String, List<Record>> statisticByURLMap = new HashMap<>();
     public Map<String, Report> statisticByURLMapCalculated = new HashMap<>();
 
-    public StatisticByURL(String name) {
-        super(name);
+    public StatisticByURL() {
+        super();
     }
 
     @Override

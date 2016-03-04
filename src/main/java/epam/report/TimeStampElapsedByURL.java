@@ -12,8 +12,8 @@ import java.util.TreeMap;
 public class TimeStampElapsedByURL extends ReportContainer {
     Map<Double, UrlEntry> timeStampElapsedByURLMap = new TreeMap<>();
 
-    public TimeStampElapsedByURL(String name) {
-        super(name);
+    public TimeStampElapsedByURL() {
+        super();
     }
 
     @Override

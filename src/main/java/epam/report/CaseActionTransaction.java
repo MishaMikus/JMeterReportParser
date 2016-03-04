@@ -5,7 +5,10 @@ import epam.model.Report;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CaseActionTransaction extends ReportContainer {
 
@@ -13,15 +16,16 @@ public class CaseActionTransaction extends ReportContainer {
     private Map<String, Map<String, Map<String, Report>>> caseActionTransAction = new HashMap<>();
 
 
-    public CaseActionTransaction(String name) {
-        super(name);
+    public CaseActionTransaction() {
+        super();
+
     }
 
     @Override
     public void add(Record rec) {
         String label = rec.label;
         if ((!label.startsWith("TC")) && (!("null".equals(rec.url)))) {
-           label=correctLabel(label);
+            label = correctLabel(label);
             String useCase = getUseCase(label);
             String action = getAction(label);
             String method = label.trim().split(" ")[0];
@@ -54,7 +58,7 @@ public class CaseActionTransaction extends ReportContainer {
         for (Map.Entry<String, Map<String, Map<String, List<Record>>>> caseEntry : caseActionTransActionDraft.entrySet()) {
             for (Map.Entry<String, Map<String, List<Record>>> actionEntry : caseEntry.getValue().entrySet()) {
                 for (Map.Entry<String, List<Record>> transActionEntry : actionEntry.getValue().entrySet()) {
-                    addReport(caseEntry.getKey(), actionEntry.getKey(), transActionEntry.getKey(), new Report(transActionEntry.getValue(),startTime,endTime));
+                    addReport(caseEntry.getKey(), actionEntry.getKey(), transActionEntry.getKey(), new Report(transActionEntry.getValue(), startTime, endTime));
                 }
             }
         }
@@ -70,8 +74,6 @@ public class CaseActionTransaction extends ReportContainer {
         }
         caseActionTransAction.get(useCase).get(action).put(transAction, report);
     }
-
-
 
 
     @Override
